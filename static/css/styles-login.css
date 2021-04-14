@@ -1,0 +1,23 @@
+.container {
+    margin: 3% auto 5% auto;
+    height: 75%;
+    width: 50%;
+}
+
+.form-control {
+    border-width: 0 0 2px 0;
+    display: inline-block;
+}
+
+.form-group label, input {
+    margin: 1%;
+}
+
+form {
+    width: 50%;
+    margin: auto;
+}
+
+.btn {
+    margin-top: 3%;
+}

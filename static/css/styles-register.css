@@ -1,0 +1,19 @@
+.container {
+    margin: 3% auto 5% auto;
+    height: 75%;
+    width: 50%;
+}
+
+.form-control {
+    border-width: 0 0 2px 0;
+    display: inline-block;
+}
+
+.form-control {
+    border: 0 0 2px 0;
+}
+
+.btn {
+    width: 15%;
+    margin: 3%;
+}

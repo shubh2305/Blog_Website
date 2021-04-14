@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<head>
+    {% block title %}
+        Blog
+    {% endblock title %}
+
+    {% block head %}
+        <link rel="stylesheet" href="{% static 'css/styles-index.css' %}">
+    {% endblock %}
+</head>
+
+{% block content %}
+    <div class="container">
+
+        
+        <div class="blog">
+            <h1>{{ post.title }}</h1>
+            <small>{{ post.author }}</small>
+            <p>{{ post.content }}</p>
+        </div>
+    
+
+    </div>
+{% endblock content %}
