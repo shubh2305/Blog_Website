@@ -13,6 +13,10 @@
     margin-right: 3%;
 }
 
+.navbar {
+    box-shadow: 0px 4px 6px 1px #000000
+}
+
 .container-fluid {
     width: 100px;
     margin-left: 3%;
