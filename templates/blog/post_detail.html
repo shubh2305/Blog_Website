@@ -14,14 +14,19 @@
 
 {% block content %}
     <div class="container">
-
-        
         <div class="blog">
             <h1>{{ post.title }}</h1>
             <small>{{ post.author }}</small>
             <p>{{ post.content }}</p>
         </div>
-    
-
     </div>
+    <hr>
+
+    {% for comment in post.comments.all %}
+        <strong>{{comment.author}}</strong>
+        <small>{{comment.date_created}}</small>
+        <p>{{comment.body}}</p>
+    {% empty %}
+        <h3>No comments here :(</h3>
+    {% endfor %}
 {% endblock content %}
