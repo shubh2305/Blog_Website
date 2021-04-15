@@ -17,7 +17,7 @@
         <div class="blog">
             <h1>{{ post.title }}</h1>
             <small>{{ post.author }}</small>
-            <p>{{ post.content }}</p>
+            <p>{{ post.body|safe }}</p>
         </div>
     </div>
     <hr>

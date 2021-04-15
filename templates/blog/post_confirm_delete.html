@@ -17,7 +17,7 @@
             <h1>Are you sure you want to delete ?</h1>
             {% csrf_token %}
             <h1>{{ post.title }}</h1>
-            <p>{{ post.content }}</p>
+            <p>{{ post.body|safe }}</p>
             <button type="submit" class="btn btn-danger">Delete</button>
             <a href="{% url 'home' %}" class="btn btn-outline-primary">Cancel</a>
         </form>

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load crispy_form_tags %}
+{% block title %}
+    Profile | {{ user }}
+{% endblock title %}
+
+{% block content %}
+    <h1>{{ user }}</h1>
+    <h3>{{ user.first_name }}</h3>
+    <h3>{{ user.last_name }}</h3>
+    <img src={{ user.profile.image.url }} alt="" style="height: 200px; width: 200px;">
+    <p>{{ user.profile.description }}</p>
+
+    {% for post in user.user_posts.all %}
+        <div class="blog shadow-sm p-3 mb-5 bg-white">
+            <h1>{{ post.title }}</h1>
+            <small>{{ post.author }}</small>
+            <p>{{ post.content }}</p>
+        </div>
+    {% endfor %}
+{% endblock content %}

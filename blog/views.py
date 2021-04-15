@@ -4,7 +4,7 @@ from .forms import NewUserForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Post
+from .models import Post, Profile
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 # Create your views here.
@@ -26,7 +26,7 @@ class PostDetailView(LoginRequiredMixin, DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model=Post
-    fields=['title', 'content']
+    fields=['title', 'body']
     success_url='/'
 
     def form_valid(self, form):
@@ -35,7 +35,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model=Post
-    fields=['title', 'content']
+    fields=['title', 'body']
     success_url='/'
 
     def form_valid(self, form):
@@ -85,3 +85,14 @@ def register_view(request):
         form = NewUserForm()
     return render(request, 'blog/register.html', {'form':form})
 
+def profile_view(request, pk):
+    user = User.objects.get(id=pk)
+    return render(request, 'blog/profile_view.html', { 'user':user })
+
+class ProfileCreateView(LoginRequiredMixin, CreateView):
+    model=Profile
+    fields=['image', 'description']
+    success_url='/'
+
+    def form_valid(self):
+        form.instance.user = self.request.user
