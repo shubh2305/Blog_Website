@@ -3,7 +3,7 @@
 {% load static %}
 <head>
     {% block title %}
-        Blog | Update
+        Blog | Add Comment
     {% endblock title %}
 
     {% block head %}
@@ -13,12 +13,11 @@
 
 {% block content %}
     <div class="container mb-6">
-        <form action="" method="POST" enctype="multipart/form-data" class="form-group">
+        <form action="" method="POST" class="form-group">
             {% csrf_token %}
+            {{ form.media }}
             {{ form|crispy }}
-            
-            {{ profile|crispy }}
-            <button type="submit" class="btn btn-success">Save</button>
+            <button type="submit" class="btn btn-success">Add Comment</button>
         </form>
     </div>
     

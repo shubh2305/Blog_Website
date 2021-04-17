@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.http import Http404
-from .forms import NewUserForm
+from .forms import NewUserForm, ProfileForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Post, Profile
+from .models import Post, Profile, Comment
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 # Create your views here.
@@ -71,6 +71,20 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         else:
             if self.request.user.is_authenticated:
                 raise Http404("You are not authenticated to edit this profile")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        data = super(UserUpdateView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            data["profile"] = ProfileForm(self.request.POST)
+        else:
+            # accessing the profile object
+            data["profile"] = ProfileForm(instance=self.object.profile)
+            #data["profile"].save()
+        return data
     
 
 def register_view(request):
@@ -96,3 +110,17 @@ class ProfileCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self):
         form.instance.user = self.request.user
+
+class CommentCreateView(LoginRequiredMixin, CreateView):
+    model = Comment
+    fields=('body',)
+
+    def get_success_url(self):
+           pk = self.kwargs["pk"]
+           return reverse("post_detail", kwargs={"pk": pk})
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        post_id= self.kwargs['pk']
+        form.instance.post = Post.objects.get(pk=post_id)
+        return super().form_valid(form)
