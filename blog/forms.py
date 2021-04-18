@@ -5,16 +5,19 @@ from .models import Profile
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField()
-    username = forms.CharField(max_length=20, widget=forms.TextInput(attrs={
-        'class':'form-control'
-    }))
-    first_name = forms.CharField(max_length=20, widget=forms.TextInput())
-    last_name = forms.CharField(max_length=20)
-    
+    username = forms.CharField(max_length=100)
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name',
+        fields = ['email', 'username',
                   'password1', 'password2']
+
+# class LoginForm(forms.ModelForm):
+#     email = forms.EmailField()
+#     password = forms.PasswordInput()
+
+#     class Meta:
+#         model = User
+#         fields = ['email', 'passowrd']
 
 class ProfileForm(forms.ModelForm):
     image = forms.ImageField()

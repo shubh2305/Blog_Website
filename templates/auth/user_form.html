@@ -13,10 +13,11 @@
 
 {% block content %}
     <div class="container mb-6">
+        
         <form action="" method="POST" enctype="multipart/form-data" class="form-group">
             {% csrf_token %}
             {{ form|crispy }}
-            
+            <img src={{ request.user.profile.image.url }} class="img-thumbnail" alt="">
             {{ profile|crispy }}
             <button type="submit" class="btn btn-success">Save</button>
         </form>

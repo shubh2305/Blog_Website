@@ -14,33 +14,40 @@
 
 {% block content %}
     <div class="container">
-        <div class="blog">
+        <div class="blog mb-5">
             <h1>{{ post.title }}</h1>
             <small>{{ post.author }}</small>
             <p>{{ post.body|safe }}</p>
         </div>
-    </div>
-    <hr>
-    {{ form.media}}
-    <p>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Comments
-        </button>
-    </p>
-    <div class="collapse mx-3 my-sm-5" id="collapseExample">
-        <div class="card card-body">
-            {% for comment in post.comments.all %}
-                <strong>{{comment.author}}</strong>
-                <small>{{comment.date_created}}</small>
-                <p>{{comment.body|safe}}</p>
-            {% empty %}
-                <h3>No comments here :(</h3>
-            {% endfor %}
-            <hr>
+    
+
+        <form action="{% url 'blog_like'  post.id  %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-outline-primary">Like</button>
+            <small> - {{ post.likes.count }} likes</small>
+        </form>
+        <hr>
+
+        <p>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Comments
+            </button>
+        </p>
+        <div class="collapse my-sm-5" id="collapseExample">
+            <a href="{% url 'create_comment' post.id %}" class="btn btn-outline-primary mb-2">Add Comment</a>
+            <div class="card card-body">
+                {% for comment in post.comments.all %}
+                    <strong>{{comment.author}}</strong>
+                    <small>{{comment.date_created}}</small>
+                    <p>{{comment.body|safe}}</p>
+                {% empty %}
+                    <h3>No comments here :(</h3>
+                {% endfor %}
+                <hr>
+            </div>
+
+            
         </div>
 
-        
     </div>
-
-    
 {% endblock content %}

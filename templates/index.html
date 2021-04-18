@@ -20,8 +20,13 @@
                 <h1>{{ post.title }}</h1>
                 <strong>{{ post.author }}</strong>
                 <small>{{ post.date_created }}</small>
-                <p>{{ post.body|safe }}</p>
-            </div>
+                <p>{{ post.body|safe|truncatewords:40 }}</p>
+                
+                <a href="{% url 'post_detail' post.id  %}" class="btn btn-outline-primary">View More</a>
+               
+                </div>
+
+            
         {% endfor %}
 
     </div>
