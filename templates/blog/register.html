@@ -18,6 +18,8 @@
             {{ form|crispy }}
             <button class="btn btn-success" >Register</button>
         </form>
+        <small>Have an account already ? <a href="{% url 'login' %}">Login
+        </a> Here</small>
     </div>
     
 {% endblock content %}

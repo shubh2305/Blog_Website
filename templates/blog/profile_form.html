@@ -1,15 +1,37 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block title %}
     Make your Profile
 {% endblock title %}
 
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/styles-profile.css' %}">
+{% endblock %}
 {% block content %}
-<div class="container mb-6">
-    <form action="" method="POST" class="form-group">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-success">Submit</button>
-    </form>
+
+<div class="container mt-5">
+
+    <h1>{{ request.user }}'s </h1>
+
+    <div class="left">
+        <img src={{ request.user.profile.image.url }} class="rounded">
+    </div>
+
+    <div class="right">
+        <div class="container ml-auto mb-6">
+            <form action="" method="POST" class="form-group" enctype="multipart/form-data">
+                
+                {% csrf_token %}
+                <div class=".form-row">
+                    {{ form|crispy }}
+                </div>
+                
+                {% if profile.user == request.user %}
+                    <button type="submit" class="btn btn-success">Submit</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock content %}

@@ -14,26 +14,26 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-dark bg-dark">
+        <nav class="navbar navbar-dark bg-dark mb-5">
             <div class="container-fluid">
 				<a class="navbar-brand" href="#">
-					Bootstrap
+					Blog
 				</a>
             </div>
 
             <div class="text-right" style="color: white">
                 {% if user.is_authenticated %}
+                    
                     <h6> <a href="{% url 'profile_view' user.id %}">{{ user.username }}</a> </h6>
-                    <a href="{% url 'logout' %}">Logout</a>
+                    <a href="{% url 'post_create' %}" class="btn btn-outline-success">Add Post</a>
+                    <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout</a>
+                   
                 {% else %}
                     <h6>Anonymous</h6>
                 {% endif %}
             </div>
         </nav>
 		<div>
-		{% for message in messages %}
-			<small class="alert alert-success">{{ meassage }}</small>
-		{% endfor %}
 		</div>
 		{% block content %}
 		{% endblock %}

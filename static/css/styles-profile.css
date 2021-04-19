@@ -1,0 +1,13 @@
+.left {
+    width: 20%;
+    float: left;
+}
+
+.left img{
+    width: 200px;
+    height: 200px;
+}
+
+.right {
+    margin-left: 20%;
+}
