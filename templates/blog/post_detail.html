@@ -26,8 +26,12 @@
             <button class="btn btn-outline-primary">Like</button>
             <small> - {{ post.likes.count }} likes</small>
         </form>
+        {% if request.user == post.author %}
+            <a href="{% url 'post_update' post.id %}" class="btn btn-primary">Update</a>
+            <a href="{% url 'post_delete' post.id %}" class="btn btn-danger">Delete</a>
+        {% endif %}
         <hr>
-
+        
         <p>
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 Comments

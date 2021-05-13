@@ -144,7 +144,7 @@ def register_view(request):
                                     password=form.cleaned_data['password1'],
                                     )
             login(request, new_user)
-            return redirect('create_profile')
+            return redirect('home')
     else:
         form = NewUserForm()
     return render(request, 'blog/register.html', {'form':form})

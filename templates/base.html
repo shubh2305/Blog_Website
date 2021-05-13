@@ -3,6 +3,7 @@
 <html>
 
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
             {% block title %}
             {% endblock %}
@@ -16,21 +17,25 @@
     <body>
         <nav class="navbar navbar-dark bg-dark mb-5">
             <div class="container-fluid">
-				<a class="navbar-brand" href="#">
+				<h4 class="navbar-brand">
 					Blog
-				</a>
+                </h4>
             </div>
-
+            <a href="{% url 'home' %}" class="ml-3">Home</a>
             <div class="text-right" style="color: white">
                 {% if user.is_authenticated %}
                     
-                    <h6> <a href="{% url 'profile_view' user.id %}">{{ user.username }}</a> </h6>
+                    <h6> <p>{{ user.username }}</p> </h6>
                     <a href="{% url 'post_create' %}" class="btn btn-outline-success">Add Post</a>
-                    <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout</a>
+                    <a href="{% url 'logout' %}" class="btn btn-outline-danger ml-3">Logout</a>
                    
                 {% else %}
                     <h6>Anonymous</h6>
+                    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                    <a href="{% url 'register' %}" class="btn btn-outline-primary ml-3">Register</a>
                 {% endif %}
+                
+                
             </div>
         </nav>
 		<div>

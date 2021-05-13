@@ -18,7 +18,7 @@
         {% for post in posts %}
             <div class="blog shadow-sm p-3 mb-5 bg-white">
                 <h1>{{ post.title }}</h1>
-                <strong> <a href="{% url 'profile_view' post.author.id %}">{{ post.author }}</a></strong>
+                <strong> <p>{{ post.author }}</p></strong>
                 <small>{{ post.date_created }}</small>
                 <p>{{ post.body|safe|truncatewords:40 }}</p>
                 

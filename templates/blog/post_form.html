@@ -13,7 +13,7 @@
 
 {% block content %}
     <div class="container mb-6">
-        <form action="" method="POST" class="form-group">
+        <form action="" method="POST" class="form-group mb-5">
             {% csrf_token %}
             {{ form.media }}
             {{ form|crispy }}
